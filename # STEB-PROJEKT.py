@@ -2,5 +2,5 @@
 import pygame
 Schwanz = 10
 if Schwanz == 10:
-    print(" I like to commit a felony")
+    print(" I'd like to commit a felony")
     
