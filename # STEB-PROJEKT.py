@@ -1,0 +1,2 @@
+# STEB-PROJEKT
+import pygame
