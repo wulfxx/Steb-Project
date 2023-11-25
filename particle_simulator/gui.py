@@ -81,81 +81,61 @@ class GUI:
         # layout sidebar-GUI
         self.tabControl = ttk.Notebook(self.tk)
         self.tab1 = ttk.Frame(self.tabControl, relief='flat')
-        self.tabControl.add(self.tab1, text='Sim-Settings')
+        self.tabControl.add(self.tab1, text='Simulation')
         self.tab2 = ttk.Frame(self.tabControl, relief='flat', width=200, height=self.sim.height + 30)
-        self.tabControl.add(self.tab2, text='Particle-Settings')
+        self.tabControl.add(self.tab2, text='Partikel')
         self.tabControl.place(x=self.sim.width, y=0)
 
         # layout self.tab1
         self.tab1_canvas = Canvas(self.tab1, width=200, height=self.sim.height)
         self.tab1_canvas.pack()
 
-        Label(self.tab1, text='Gravity:', font=('helvetica', 8)).place(x=7, y=20, anchor='nw')
-        self.gravity_entry = Spinbox(self.tab1, width=7, from_=0, to=1, increment=0.1)
-        self.gravity_entry.delete(0, END)
-        self.gravity_entry.insert(0, self.sim.g)
-        self.gravity_entry.place(x=100, y=20)
-
-        Label(self.tab1, text='Air Resistance:', font=('helvetica', 8)).place(x=7, y=50, anchor='nw')
-        self.air_res_entry = Spinbox(self.tab1, width=7, from_=0, to=1, increment=0.01)
-        self.air_res_entry.delete(0, END)
-        self.air_res_entry.insert(0, self.sim.air_res)
-        self.air_res_entry.place(x=100, y=50)
-
-        Label(self.tab1, text='Ground Friction:', font=('helvetica', 8)).place(x=7, y=80, anchor='nw')
-        self.friction_entry = Spinbox(self.tab1, width=7, from_=0, to=1, increment=0.01)
-        self.friction_entry.delete(0, END)
-        self.friction_entry.insert(0, self.sim.ground_friction)
-        self.friction_entry.place(x=100, y=80)
 
         self.temp_sc = Scale(self.tab1, from_=0, to=5, orient=HORIZONTAL, resolution=0.1, length=175, width=10,
                              tickinterval=1, fg='gray65', activebackground='midnight blue', cursor='hand2')
         self.temp_sc.set(self.sim.temperature)
         self.temp_sc.place(x=100, y=153, anchor='center')
-        Label(self.tab1, text='Temperature:', font=('helvetica', 8)).place(x=7, y=110, anchor='nw')
+        Label(self.tab1, text='Temperatur:', font=('helvetica', 8)).place(x=7, y=110, anchor='nw')
 
         self.speed_sc = Scale(self.tab1, from_=0, to=3, orient=HORIZONTAL, resolution=0.01, length=175, width=10,
                               tickinterval=1, fg='gray65', activebackground='midnight blue', cursor='hand2')
         self.speed_sc.set(1)
         self.speed_sc.place(x=100, y=233, anchor='center')
-        Label(self.tab1, text='Simulation Speed:', font=('helvetica', 8)).place(x=7, y=190, anchor='nw')
+        Label(self.tab1, text='Simulationsgeschwindigkeit:', font=('helvetica', 8)).place(x=7, y=190, anchor='nw')
 
         self.show_fps = BooleanVar(self.tk, True)
-        self.fps_chk = Checkbutton(self.tab1, text='Display FPS', font=('helvetica', 8), var=self.show_fps)
+        self.fps_chk = Checkbutton(self.tab1, text='FPS anzeigen', font=('helvetica', 8), var=self.show_fps)
         self.fps_chk.place(x=10, y=260, anchor='nw')
 
         self.show_num = BooleanVar(self.tk, True)
-        self.num_chk = Checkbutton(self.tab1, text='Display # Particles', font=('helvetica', 8), var=self.show_num)
+        self.num_chk = Checkbutton(self.tab1, text='Anzahl der Partikel anzeigen', font=('helvetica', 8), var=self.show_num)
         self.num_chk.place(x=10, y=280, anchor='nw')
 
-        self.show_links = BooleanVar(self.tk, True)
-        self.links_chk = Checkbutton(self.tab1, text='Display links', font=('helvetica', 8), var=self.show_links)
-        self.links_chk.place(x=10, y=300, anchor='nw')
 
-        self.tab1_canvas.create_text(100, 335, text='Blocking Edges', font=('helvetica', 9), anchor='center')
+        self.tab1_canvas.create_text(100, 335, text='Ecken blockieren', font=('helvetica', 9), anchor='center')
         self.tab1_canvas.create_line(10, 345, 190, 345, fill='grey50')
 
         self.top_bool = BooleanVar(self.tk, True)
-        self.top_chk = Checkbutton(self.tab1, text='top', font=('helvetica', 8), var=self.top_bool)
+        self.top_chk = Checkbutton(self.tab1, text='oben', font=('helvetica', 8), var=self.top_bool)
         self.top_chk.place(x=30, y=350, anchor='nw')
 
         self.bottom_bool = BooleanVar(self.tk, True)
-        self.bottom_chk = Checkbutton(self.tab1, text='bottom', font=('helvetica', 8), var=self.bottom_bool)
+        self.bottom_chk = Checkbutton(self.tab1, text='unten', font=('helvetica', 8), var=self.bottom_bool)
         self.bottom_chk.place(x=110, y=350, anchor='nw')
 
         self.left_bool = BooleanVar(self.tk, True)
-        self.left_chk = Checkbutton(self.tab1, text='left', font=('helvetica', 8), var=self.left_bool)
+        self.left_chk = Checkbutton(self.tab1, text='links', font=('helvetica', 8), var=self.left_bool)
         self.left_chk.place(x=30, y=370, anchor='nw')
 
         self.right_bool = BooleanVar(self.tk, True)
-        self.right_chk = Checkbutton(self.tab1, text='right', font=('helvetica', 8), var=self.right_bool)
+        self.right_chk = Checkbutton(self.tab1, text='rechts', font=('helvetica', 8), var=self.right_bool)
         self.right_chk.place(x=110, y=370, anchor='nw')
 
-        self.tab1_canvas.create_text(100, 405, text='Optimization', font=('helvetica', 9), anchor='center')
+        self.tab1_canvas.create_text(100, 405, text='Optimierung', font=('helvetica', 9), anchor='center')
         self.tab1_canvas.create_line(10, 415, 190, 415, fill='grey50')
 
         self.grid_bool = BooleanVar(self.tk, True)
-        self.grid_chk = Checkbutton(self.tab1, text='Use Grid', font=('helvetica', 8), var=self.grid_bool)
+        self.grid_chk = Checkbutton(self.tab1, text='Raster verwenden', font=('helvetica', 8), var=self.grid_bool)
         self.grid_chk.place(x=10, y=425, anchor='nw')
 
         Label(self.tab1, text='Grid-Res:', font=('helvetica', 8)).place(x=7, y=455, anchor='nw')
@@ -174,20 +154,6 @@ class GUI:
         self.grid_res_x_value.trace("w", self.sim.update_grid)
         self.grid_res_y_value.trace("w", self.sim.update_grid)
 
-        self.tab1_canvas.create_text(100, 515, text='Extra', font=('helvetica', 9), anchor='center')
-        self.tab1_canvas.create_line(10, 525, 190, 525, fill='grey50')
-
-        Label(self.tab1, text='Min Spawn-Delay:', font=('helvetica', 8)).place(x=7, y=533, anchor='nw')
-        self.delay_entry = Spinbox(self.tab1, width=7, from_=0, to=1, increment=0.01)
-        self.delay_entry.delete(0, END)
-        self.delay_entry.insert(0, self.sim.min_spawn_delay)
-        self.delay_entry.place(x=100, y=533)
-
-        self.calculate_radii_diff_bool = BooleanVar(self.tk, False)
-        self.calculate_radii_diff_chk = Checkbutton(self.tab1, text='Better Radii-Calculation',
-                                                    font=('helvetica', 8),
-                                                    var=self.calculate_radii_diff_bool)
-        self.calculate_radii_diff_chk.place(x=7, y=553, anchor='nw')
 
         self.extra_img = PhotoImage(file=os.path.join(self.path, 'Assets/dots.gif'), master=self.tk).subsample(11, 11)
         self.extra_btn = Button(self.tab1, image=self.extra_img, cursor='hand2', bg='#F0F0F0',

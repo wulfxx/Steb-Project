@@ -441,7 +441,6 @@ class Simulation:
         self.left = self.gui.left_bool.get()
         self.right = self.gui.right_bool.get()
         self.use_grid = self.gui.grid_bool.get()
-        self.calculate_radii_diff = self.gui.calculate_radii_diff_bool.get()
 
     def simulate(self):
         while self.running:
@@ -488,15 +487,6 @@ class Simulation:
             for particle in self.particles:
                 particle.update(self.grid)
 
-            if self.gui.show_links.get():
-                if self.stress_visualization and not self.paused:
-                    for p1, p2, percentage in self.link_colors:
-                        color = [max(255 * percentage, 235)] + [235 * (1 - percentage)] * 2
-                        cv2.line(image, (int(p1.x), int(p1.y)), (int(p2.x), int(p2.y)), color, 1)
-                else:
-                    for p1 in self.particles:
-                        for p2 in p1.linked:
-                            cv2.line(image, (int(p1.x), int(p1.y)), (int(p2.x), int(p2.y)), [235] * 3, 1)
 
             for particle in self.particles:
                 cv2.circle(image, (int(particle.x), int(particle.y)), particle.r, particle.color, -1)
