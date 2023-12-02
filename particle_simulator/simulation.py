@@ -510,7 +510,7 @@ class Simulation:
                 self.gui.canvas.create_text(10, 10, text=f"FPS: {round(self.fps, 2)}", anchor='nw',
                                         font=('Helvetica', 9, 'bold'))
             if self.gui.show_num.get():
-                self.gui.canvas.create_text(10, 25, text=f"Particles: {len(self.particles)}", anchor='nw',
+                self.gui.canvas.create_text(10, 25, text=f"Partikel: {len(self.particles)}", anchor='nw',
                                         font=('Helvetica', 9, 'bold'))
 
             self.prev_mx, self.prev_my = self.mx, self.my

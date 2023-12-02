@@ -171,8 +171,8 @@ class GUI:
         self.radius_entry.insert(0, 'scroll')
         self.radius_entry.place(x=100, y=20)
 
-        Label(self.tab2, text='Color:', font=('helvetica', 8)).place(x=7, y=50, anchor='nw')
-        self.color_var = StringVar(self.tk, 'random')
+        Label(self.tab2, text='Farbe:', font=('helvetica', 8)).place(x=7, y=50, anchor='nw')
+        self.color_var = StringVar(self.tk, 'zufällig')
         self.color_entry = Entry(self.tab2, width=8, textvariable=self.color_var)
         self.color_entry.place(x=100, y=50)
         self.color_var.trace("w", self.change_color_entry)
@@ -181,13 +181,13 @@ class GUI:
                                                                  activeoutline='red', tags="part_color_rect")
         self.tab2_canvas.tag_bind("part_color_rect", "<Button-1>", self.ask_color_entry)
 
-        Label(self.tab2, text='Mass:', font=('helvetica', 8)).place(x=7, y=80, anchor='nw')
+        Label(self.tab2, text='Masse:', font=('helvetica', 8)).place(x=7, y=80, anchor='nw')
         self.mass_entry = Spinbox(self.tab2, width=7, from_=0.1, to=100, increment=0.1)
         self.mass_entry.delete(0, END)
         self.mass_entry.insert(0, 1)
         self.mass_entry.place(x=100, y=80)
 
-        Label(self.tab2, text='Bounciness:', font=('helvetica', 8)).place(x=7, y=110, anchor='nw')
+        Label(self.tab2, text='Sprungkraft:', font=('helvetica', 8)).place(x=7, y=110, anchor='nw')
         self.bounciness_entry = Spinbox(self.tab2, width=7, from_=0, to=1, increment=0.1)
         self.bounciness_entry.delete(0, END)
         self.bounciness_entry.insert(0, 0.7)
@@ -206,91 +206,20 @@ class GUI:
         self.velocity_y_entry.place(x=100, y=162)
 
         self.locked_bool = BooleanVar(self.tk, False)
-        self.locked_chk = Checkbutton(self.tab2, text='Locked', font=('helvetica', 8),
+        self.locked_chk = Checkbutton(self.tab2, text='Fixieren', font=('helvetica', 8),
                                       var=self.locked_bool)
         self.locked_chk.place(x=7, y=190, anchor='nw')
 
         self.do_collision_bool = BooleanVar(self.tk, False)
-        self.do_collision_chk = Checkbutton(self.tab2, text='Check Collisions', font=('helvetica', 8),
+        self.do_collision_chk = Checkbutton(self.tab2, text='Kollisionen prüfen', font=('helvetica', 8),
                                             var=self.do_collision_bool)
         self.do_collision_chk.place(x=7, y=210, anchor='nw')
 
-        Label(self.tab2, text='Attraction-radius:', font=('helvetica', 8)).place(x=7, y=250, anchor='nw')
+        Label(self.tab2, text='Anziehungsradius:', font=('helvetica', 8)).place(x=7, y=250, anchor='nw')
         self.attr_r_entry = Spinbox(self.tab2, width=7, from_=-1, to=500, increment=1)
         self.attr_r_entry.delete(0, END)
         self.attr_r_entry.insert(0, -1)
         self.attr_r_entry.place(x=100, y=250)
-
-        Label(self.tab2, text='Attr-strength:', font=('helvetica', 8)).place(x=7, y=273, anchor='nw')
-        self.attr_strength_entry = Spinbox(self.tab2, width=7, from_=0, to=50, increment=0.1)
-        self.attr_strength_entry.delete(0, END)
-        self.attr_strength_entry.insert(0, 0.5)
-        self.attr_strength_entry.place(x=100, y=273)
-
-        self.gravity_mode_bool = BooleanVar(self.tk, False)
-        self.gravity_mode_chk = Checkbutton(self.tab2, text='Gravity-Mode', font=('helvetica', 7),
-                                            var=self.gravity_mode_bool)
-        self.gravity_mode_chk.place(x=7, y=290, anchor='nw')
-
-        Label(self.tab2, text='Repulsion-radius:', font=('helvetica', 8)).place(x=7, y=313, anchor='nw')
-        self.repel_r_entry = Spinbox(self.tab2, width=7, from_=0, to=500, increment=1)
-        self.repel_r_entry.delete(0, END)
-        self.repel_r_entry.insert(0, 10)
-        self.repel_r_entry.place(x=100, y=323)
-
-        Label(self.tab2, text='Repel-strength:', font=('helvetica', 8)).place(x=7, y=336, anchor='nw')
-        self.repel_strength_entry = Spinbox(self.tab2, width=7, from_=0, to=50, increment=0.1)
-        self.repel_strength_entry.delete(0, END)
-        self.repel_strength_entry.insert(0, 1)
-        self.repel_strength_entry.place(x=100, y=346)
-
-        self.linked_group_bool = BooleanVar(self.tk, True)
-        self.linked_group_chk = Checkbutton(self.tab2, text='Linked to group-particles', font=('helvetica', 8),
-                                            var=self.linked_group_bool)
-        self.linked_group_chk.place(x=7, y=376, anchor='nw')
-
-        Label(self.tab2, text='Link-breaking-force:', font=('helvetica', 8)).place(x=7, y=400, anchor='nw')
-        Label(self.tab2, text='Attr:', font=('helvetica', 8)).place(x=7, y=420, anchor='nw')
-        self.link_attr_break_entry = Spinbox(self.tab2, width=5, from_=0, to=5000, increment=0.1)
-        self.link_attr_break_entry.delete(0, END)
-        self.link_attr_break_entry.insert(0, -1)
-        self.link_attr_break_entry.place(x=40, y=420)
-        Label(self.tab2, text='Repel:', font=('helvetica', 8)).place(x=100, y=420, anchor='nw')
-        self.link_repel_break_entry = Spinbox(self.tab2, width=5, from_=0, to=5000, increment=0.1)
-        self.link_repel_break_entry.delete(0, END)
-        self.link_repel_break_entry.insert(0, -1)
-        self.link_repel_break_entry.place(x=140, y=420)
-
-        Label(self.tab2, text='Particle-group:', font=('helvetica', 8)).place(x=7, y=450, anchor='nw')
-        self.group_indices = [1]
-        self.groups_entry = ttk.Combobox(self.tab2, width=10, values=['group1'])
-        self.groups_entry.current(0)
-        self.groups_entry.place(x=10, y=470, anchor='nw')
-
-        self.group_add_btn = Button(self.tab2, text="+", font=('Helvetica', 15, 'bold'), cursor='hand2',
-                                    fg="grey14",
-                                    bg='#F0F0F0', activebackground='#F0F0F0', relief='flat', width=1,
-                                    command=self.sim.add_group)
-        self.group_add_btn.place(x=105, y=480, anchor='center')
-
-        self.select_img2 = PhotoImage(file=os.path.join(self.path, 'Assets/select2.gif'), master=self.tk).subsample(54, 54)
-        self.group_select_btn = Button(self.tab2, image=self.select_img2, cursor='hand2', bg='#F0F0F0',
-                                       activebackground='#F0F0F0', relief='flat',
-                                       command=self.sim.select_group)
-        self.group_select_btn.place(x=123, y=480, anchor='center')
-
-        self.separate_group_bool = BooleanVar(self.tk, False)
-        self.separate_group_chk = Checkbutton(self.tab2, text='Separate Group', font=('helvetica', 8),
-                                              var=self.separate_group_bool)
-        self.separate_group_chk.place(x=10, y=495, anchor='nw')
-
-        self.copy_selected_btn = Button(self.tab2, text='Copy from selected', bg='light coral',
-                                        command=self.sim.copy_from_selected)
-        self.copy_selected_btn.place(x=15, y=self.sim.height - 65)
-        self.set_selected_btn = Button(self.tab2, text='Set Selected', bg='light green', command=self.sim.set_selected)
-        self.set_selected_btn.place(x=15, y=self.sim.height - 30)
-        self.set_all_btn = Button(self.tab2, text='Set All', bg='light blue', command=self.sim.set_all)
-        self.set_all_btn.place(x=95, y=self.sim.height - 30)
 
     def ask_color_entry(self, *event):
         color = colorchooser.askcolor(title="Choose color")
